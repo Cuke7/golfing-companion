@@ -5,13 +5,12 @@
   margin-left: 2vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
+  box-shadow: 0px 4px 12px 0px #000;
 }
 
 #file {
   margin-bottom: 10px;
 }
-
-
 
 .leaflet-popup-content{
   margin: 8px;
@@ -25,7 +24,7 @@
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size: 10vh;
+  font-size: 8vh;
   color: white;
   font-family: Roboto;
 }
