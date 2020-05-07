@@ -1,0 +1,121 @@
+#map {
+  /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+  height: 60vh;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+#file {
+  margin-bottom: 10px;
+}
+
+
+
+.leaflet-popup-content{
+  margin: 8px;
+  white-space: pre;
+}
+
+.header{
+  padding: 5vh;
+  background-color: #dd2e44;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size: 10vh;
+  color: white;
+  font-family: Roboto;
+}
+
+input{
+  font-size: 3vh;
+  color: white;
+  font-family: Roboto;
+  border-radius: 3px;
+  border: none;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  background-color: #dd2e44;
+  outline: 0;
+  box-shadow: 0px 2px 4px 0px #000;
+}
+
+::placeholder {
+  color: white;
+}
+
+button{
+  font-size: 3vh;
+  color: white;
+  font-family: Roboto;
+  margin-left: 10px;
+  border-radius: 3px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  background-color: #dd2e44;
+  outline: 0;
+  box-shadow: 0px 2px 4px 0px #000;
+}
+
+.hidden{
+  display: none;
+}
+
+button:active {
+  box-shadow: 0px 2px 6px 0px #000;
+}
+[ripple] {
+  position: relative;
+  overflow: hidden;
+}
+[ripple] .ripple--container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+[ripple] .ripple--container span {
+  transform: scale(0);
+  border-radius: 100%;
+  position: absolute;
+  opacity: 0.75;
+  background-color: #fff;
+  animation: ripple 1000ms;
+}
+@-moz-keyframes ripple {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@-webkit-keyframes ripple {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@-o-keyframes ripple {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@keyframes ripple {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+body{
+  margin: 0px;
+  background-color: #5c913b;
+}
