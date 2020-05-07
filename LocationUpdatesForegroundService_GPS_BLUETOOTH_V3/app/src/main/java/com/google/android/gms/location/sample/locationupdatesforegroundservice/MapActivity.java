@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -42,7 +41,7 @@ public class MapActivity extends AppCompatActivity {
         String data = getValue();
         data = data.replaceAll("/\n/g", "%0A");
         String params = Uri.encode(data,",:");
-        maps.loadUrl("https://cuke7.github.io/golfing-map/index.html?data="+params);
+        maps.loadUrl("https://cuke7.github.io/golfing-companion/index.html?data="+params);
 
 
         mSaveButton = findViewById(R.id.save_button);
