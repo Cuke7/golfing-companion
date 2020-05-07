@@ -41,9 +41,7 @@ public class MapActivity extends AppCompatActivity {
 
         String data = getValue();
         data = data.replaceAll("/\n/g", "%0A");
-        Log.d(TAG, "TOTO: " + data);
         String params = Uri.encode(data,",:");
-        Log.d(TAG, "TOTO: " + params);
         maps.loadUrl("https://cuke7.github.io/golfing-map/index.html?data="+params);
 
 
@@ -55,12 +53,12 @@ public class MapActivity extends AppCompatActivity {
                 String data = getValue();
                 data = data.replaceAll("/\n/g", "%0A");
                 String params = Uri.encode(data,",:");
+
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("game_data", params);
                 assert clipboard != null;
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(MapActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "TOTO: "+params);
             }
         });
 

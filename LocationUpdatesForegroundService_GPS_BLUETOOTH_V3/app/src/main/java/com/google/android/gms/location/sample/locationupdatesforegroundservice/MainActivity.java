@@ -294,7 +294,9 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View view) {
                 mService.removeLocationUpdates();
                 String data = getValue();
+                data = data.substring(0, data.length() - 1);
                 Log.d(TAG, "BLUETOOTH: " + data);
+                storeValue(data);
                 mOpenMAp.setEnabled(true);
             }
         });

@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let game_data = decodeURI(url_params.data)
     show_game_data(game_data)
   }
+
+  console.log("44.492595,-0.6427769,7%20mai%202020%2015:49:39,Hello%20world!%0A44.4931005,-0.6398907,7%20mai%202020%2015:51:39,Hello%20world!%0A");
 });
 
 function toggle_UI(){
