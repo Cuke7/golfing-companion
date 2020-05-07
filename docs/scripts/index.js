@@ -1,3 +1,5 @@
+var markers = new L.FeatureGroup();
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
 
@@ -28,6 +30,7 @@ function toggle_UI(){
 }
 
 function show_game_data(game_data){
+  markers.clearLayers();
   var latlngs = [];
   game_data.split("\n").forEach(elem => {
     let markers_data = elem.split(',')
@@ -37,8 +40,10 @@ function show_game_data(game_data){
 
   var polyline = L.polyline(latlngs, {
     color: 'red'
-  }).addTo(macarte);
-  macarte.fitBounds(polyline.getBounds(),{padding: [75,75]});
+  })
+  markers.addLayer(polyline);
+  macarte.addLayer(markers);
+  macarte.fitBounds(polyline.getBounds(),{padding: [0,100]});
 }
 
 
@@ -65,7 +70,9 @@ function initMap() {
 }
 
 function add_marker(lat, long, text){
-  var m = L.marker([lat, long]).addTo(macarte),
+  var m = L.marker([lat, long]);
+  markers.addLayer(m);
+  macarte.addLayer(markers);
   p = new L.Popup({
     autoClose: false,
     closeOnClick: false
