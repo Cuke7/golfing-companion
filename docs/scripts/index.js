@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   initMap();
 
+  let h = window.innerHeight - document.getElementById("container").clientHeight;
+  console.log(h);
+  document.getElementById('map').style.height = h-40+"px"
+
   // For dev purpose:
   let uri = "44.492933,-0.639850,6 mai 2020 17:34:07,tag 006 OK\n44.494933,-0.636850,6 mai 2020 17:41:33,tag 005 OK\n44.491933,-0.632850,6 mai 2020 17:42:01,tag 001 OK";
   uri = uri.replace(/\n/g, "%0A");

@@ -17,19 +17,21 @@
 <body>
   <!-- <input type="file" id="file" name="file" /> -->
 
-  <div id="header_div" class = "header">
-    <div>Golfing companion</div>
-  </div>
-
-  <div id="input_button" style="width: 100%; text-align: center; margin-top: 2vh;">
-    <!-- <input id ="game_data" placeholder="" style="display: inline-block;"></input> -->
-    <div class="group" style = "display: inline-block;">
-      <input id="game_data" type="text" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Paste data from the app ⛳</label>
+  <div id ="container">
+    <div id="header_div" class = "header">
+      <div>Golfing companion</div>
     </div>
-    <button class = ".tx--white(ripple)" ripple = "ripple" onclick="show_data()">SHOW</button>
+
+    <div id="input_button" style="width: 100%; text-align: center; margin-top: 2vh;">
+      <!-- <input id ="game_data" placeholder="" style="display: inline-block;"></input> -->
+      <div class="group" style = "display: inline-block;">
+        <input id="game_data" type="text" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Paste data from the app ⛳</label>
+      </div>
+      <button class = ".tx--white(ripple)" ripple = "ripple" onclick="show_data()">SHOW</button>
+    </div>
   </div>
 
   <div id="map">

@@ -1,11 +1,11 @@
+html,body { height:100%; }
+
 #map {
   /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
-  height: 60vh;
-  margin-right: 2vw;
-  margin-left: 2vw;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  height: 55vh;
+  margin: 20px;
   box-shadow: 0px 4px 12px 0px #000;
+  height: 40%;
 }
 
 #file {
@@ -24,7 +24,7 @@
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size: 8vh;
+  font-size: 6vh;
   color: white;
   font-family: Roboto;
 }
