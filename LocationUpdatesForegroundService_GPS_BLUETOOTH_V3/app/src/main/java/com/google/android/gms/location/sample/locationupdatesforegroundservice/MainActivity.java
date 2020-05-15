@@ -48,6 +48,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements
     private Button mRefreshButton;
     private Button mOpenMAp;
     private Button mGetLocation;
+    private TextView mLastLocation;
 
     private ListView listView;
     private ArrayList<String> mDeviceList = new ArrayList<String>();
@@ -249,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements
         mRefreshButton = findViewById(R.id.refresh_button);
         mOpenMAp = findViewById(R.id.open_map);
         mGetLocation = findViewById(R.id.get_location);
+        mLastLocation = findViewById(R.id.last_location);
 
         mGetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,6 +273,8 @@ public class MainActivity extends AppCompatActivity implements
                     mService.requestLocationUpdates();
                 }
 
+
+                /*
                 // Clear the text file
                 File file = new File(getExternalFilesDir(null), "GPS data.txt");
                 Log.d(TAG,"FILE PATH: " + getExternalFilesDir(null));
@@ -283,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements
                     osw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 storeValue("");
             }
@@ -294,7 +299,9 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View view) {
                 mService.removeLocationUpdates();
                 String data = getValue();
-                data = data.substring(0, data.length() - 1);
+                if(data.length() > 1){
+                    data = data.substring(0, data.length() - 1);
+                }
                 Log.d(TAG, "BLUETOOTH: " + data);
                 storeValue(data);
                 mOpenMAp.setEnabled(true);
@@ -304,6 +311,12 @@ public class MainActivity extends AppCompatActivity implements
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // MAKE THE DEVICE DISCOVERABLE
+                Intent discoverableIntent =
+                        new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+                startActivity(discoverableIntent);
+
                 final Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
 
                 if (pairedDevices.size() > 0) {
@@ -343,11 +356,6 @@ public class MainActivity extends AppCompatActivity implements
                         }
                     }
                 });
-
-                String data;
-                data = getValue();
-                String text = Utils.getLocationText(LocationUpdatesService.mLocation);
-                storeValue(data + text + "," + DateFormat.getDateTimeInstance().format(new Date()) + "," + "tag 001"+',');
             }
         });
 
@@ -370,12 +378,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
         //BLUETOOTH CODE:
-
-        // MAKE THE DEVICE DISCOVERABLE
-        Intent discoverableIntent =
-                new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-        startActivity(discoverableIntent);
 
         // GET A LIST OF PAIRED DEVICES
         final Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
@@ -482,7 +484,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Provide an additional rationale to the user. This would happen if the user denied the
         // request previously, but didn't check the "Don't ask again" checkbox.
-        if (shouldProvideRationale) {
+        /*if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.");
             Snackbar.make(
                     findViewById(R.id.activity_main),
@@ -499,6 +501,7 @@ public class MainActivity extends AppCompatActivity implements
                     })
                     .show();
         } else {
+
             Log.i(TAG, "Requesting permission");
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the user denied the permission
@@ -506,22 +509,19 @@ public class MainActivity extends AppCompatActivity implements
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
+        }*/
 
-        Snackbar.make(
-                findViewById(R.id.activity_main),
-                R.string.permission_rationale,
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Request permission
-                        ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                REQUEST_PERMISSIONS_REQUEST_CODE);
-                    }
-                })
-                .show();
+        Log.i(TAG, "Requesting permission");
+        // Request permission. It's possible this can be auto answered if device policy
+        // sets the permission in a given state or the user denied the permission
+        // previously and checked "Never ask again".
+
+        String[] PERMISSIONS = {
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+
+        ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_PERMISSIONS_REQUEST_CODE);
     }
 
     /**
@@ -575,6 +575,7 @@ public class MainActivity extends AppCompatActivity implements
             if (location != null) {
                 Toast.makeText(MainActivity.this, Utils.getLocationText(location),
                         Toast.LENGTH_SHORT).show();
+                mLastLocation.setText("Last location: " + Utils.getLocationText(location));
             }
         }
     }

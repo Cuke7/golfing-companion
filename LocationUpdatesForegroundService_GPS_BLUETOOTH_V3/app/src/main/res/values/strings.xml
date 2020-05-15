@@ -12,7 +12,7 @@
 -->
 
 <resources>
-    <string name="app_name">Golfing map</string>
+    <string name="app_name">Golfing companion</string>
 
     <string name="launch_activity">Start</string>
     <string name="location_unknown">Location unknown</string>

@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:shadowColor="#504D4D"
         android:text="Start"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintBottom_toTopOf="@+id/last_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:shadowColor="#504D4D"
         android:text="open map"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintBottom_toTopOf="@+id/last_location"
         app:layout_constraintEnd_toStartOf="@+id/request_location_updates_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:shadowColor="#504D4D"
         android:text="GET"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/remove_location_updates_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -106,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stop"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintBottom_toTopOf="@+id/last_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/request_location_updates_button"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -126,7 +127,7 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="4dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="116dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -161,6 +162,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connect_button" />
 
+    <TextView
+        android:id="@+id/last_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Last location: "
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
