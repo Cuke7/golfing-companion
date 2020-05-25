@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:shadowColor="#504D4D"
         android:text="GET"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/remove_location_updates_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
