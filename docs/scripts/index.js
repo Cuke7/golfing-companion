@@ -6,12 +6,14 @@ var macarte = null;
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
+  document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
   initMap();
 
 
   // Resize de the map to fit to the sreen
   let h = window.innerHeight - document.getElementById("container").clientHeight;
-  console.log(h);
+  // console.log(h);
   document.getElementById('map').style.height = h - 40 + "px"
 
 
@@ -161,3 +163,62 @@ function show_data() {
     ripple.appendChild(rippleContainer);
   }
 }());
+
+function handleFileSelect(evt) {
+  markers.clearLayers();
+  let tab = [];
+  var file = evt.target.files; // FileList object
+  var selectedFile = document.getElementById('file').files[0];
+  console.log(selectedFile);
+  var reader = new FileReader();
+
+  reader.onload = function (event) {
+
+    let temp = reader.result.split("\n");
+    for (var i = 0; i < temp.length; i++) {
+      tab.push(temp[i].split(","));
+    }
+    console.table(tab);
+
+    //let markers = [];
+    let toto = [];
+    for (var i = 0; i < tab.length; i++) {
+      toto.push({
+        pos: [tab[i][0], tab[i][1]]
+        //popup: tab[i][2].trim() + "\n" + tab[i][3].trim()
+      })
+    }
+    console.log(toto);
+
+    toto.forEach(function (obj) {
+      var m = L.marker(obj.pos).addTo(macarte),
+        p = new L.Popup({
+          autoClose: false,
+          closeOnClick: false
+        })
+          .setContent(obj.popup)
+          .setLatLng(obj.pos);
+      //m.bindPopup(p).openPopup();
+      markers.addLayer(m);
+    });
+    var latlngs = [];
+    for (var i = 0; i < toto.length; i++) {
+      latlngs.push(toto[i].pos);
+    }
+
+    for (let i = 1; i < latlngs.length; i++) {
+      console.log(i);
+      let distance = macarte.distance(latlngs[i - 1], latlngs[i]).toFixed(2) + "m"
+      var polyline = L.polyline([latlngs[i - 1], latlngs[i]], {
+        color: 'red'
+      })
+      polyline.bindTooltip(distance, { permanent: true });
+      markers.addLayer(polyline);
+    }
+    macarte.addLayer(markers);
+    var polylines = L.polyline(latlngs);
+    macarte.fitBounds(polylines.getBounds(), { padding: [0, 0] });
+    
+  };
+  reader.readAsText(selectedFile);
+}
