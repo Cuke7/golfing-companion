@@ -4,6 +4,8 @@ html,body { height:100%; }
   /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
   height: 55vh;
   margin: 20px;
+  margin-left: 5vw;
+  margin-right: 5vw;
   box-shadow: 0px 4px 12px 0px #000;
   height: 40%;
 }
